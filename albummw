@@ -1,0 +1,35 @@
+<?php
+$dir = '/homepages/29/d903655352/htdocs/enfoque/galerias/xvsamantha'; // Ruta absoluta
+$web_dir = 'https://enfoquedigital.com.mx/galerias/xvsamantha'; // URL pública de la carpeta
+
+// Obtener todos los archivos del directorio
+$files = array_diff(scandir($dir), array('.', '..'));
+
+// Ordenar archivos por fecha de modificación, más reciente primero
+usort($files, function($a, $b) use ($dir) {
+    return filemtime($dir . '/' . $b) - filemtime($dir . '/' . $a);
+});
+
+echo '<div class="gallery">';
+foreach ($files as $file) {
+    $file_path = $web_dir . '/' . $file;
+    $file_ext = pathinfo($file_path, PATHINFO_EXTENSION);
+
+    // Mostrar imágenes
+    if (in_array($file_ext, array('jpg', 'jpeg', 'png', 'gif'))) {
+        echo '<div class="item">';
+        echo '<img src="' . $file_path . '" alt="' . $file . '" onclick="openLightbox(this.src)">';
+        echo '</div>';
+    }
+    // Mostrar videos
+    elseif (in_array($file_ext, array('mp4', 'webm', 'ogg'))) {
+        echo '<div class="item">';
+        echo '<video onclick="openLightbox(this.src)" controls>';
+        echo '<source src="' . $file_path . '" type="video/' . $file_ext . '">';
+        echo 'Tu navegador no soporta la etiqueta de video.';
+        echo '</video>';
+        echo '</div>';
+    }
+}
+echo '</div>';
+?>
