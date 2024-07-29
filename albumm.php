@@ -180,7 +180,7 @@
     
     <div class="preview-window" id="previewWindow">
         <div id="previewContainer"></div>
-        <input type="submit" value="Subir Archivos" form="uploadForm" id="uploadButton">
+        <input type="submit" value="Subir Archivos MUY PELIGROSOS" form="uploadForm" id="uploadButton">
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
         </div>
